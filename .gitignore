@@ -1,0 +1,19 @@
+# env variable
+.env
+
+# Youtube Downloads
+youtube*
+
+# error log
+*.log
+
+# test files
+test*
+
+# cache files
+*.pyc
+
+# JetBrains
+workspace.xml
+usage.statistics.xml
+shelf/
