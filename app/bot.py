@@ -1,6 +1,6 @@
 import os
 import random
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import discord
 import youtube_dl
 import asyncio
