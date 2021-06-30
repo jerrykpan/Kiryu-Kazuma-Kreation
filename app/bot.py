@@ -3,22 +3,40 @@ import random
 from dotenv import load_dotenv
 import discord
 import youtube_dl
+import asyncio
 from music_cog import MusicSFX
 players = {}
 
 # 1
-from discord.ext import commands
+from discord.ext import commands, tasks
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+# load_dotenv()
+# Local env token
+# TOKEN = os.getenv('DISCORD_TOKEN')
+
+TOKEN = os.environ.get('DISCORD_TOKEN')
 
 # 2
-bot = commands.Bot(command_prefix="$")
+
+# Declaring intents
+intents = discord.Intents.default()
+intents.members = True
+
+bot = commands.Bot(command_prefix="$", intents=intents)
 
 @bot.event
 async def on_ready():
     print(f"{bot.user.name} has connected to Discord!")
 
+
+@bot.command(name="snooze")
+async def snooze(ctx):
+    # testing asyncio.sleep()
+    for i in range(1, 6):
+        message = "Z" * i + "." * i
+        await ctx.send(message)
+        await asyncio.sleep(i)
+    await ctx.send("*W O K E*")
 
 @bot.command(name="hello", help="Responds with a random greeting")
 async def hello(ctx):
