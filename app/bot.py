@@ -5,6 +5,7 @@ import discord
 import youtube_dl
 import asyncio
 from music_cog import MusicSFX
+from steam_cog import SteamGames
 players = {}
 
 # 1
@@ -123,5 +124,6 @@ async def help(ctx):
     embed.add_field(name="!hello", value="bruh")
 
 bot.add_cog(MusicSFX(bot))
+bot.add_cog(SteamGames(bot))
 
 bot.run(TOKEN)
