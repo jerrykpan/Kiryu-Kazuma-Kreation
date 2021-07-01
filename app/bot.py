@@ -28,6 +28,7 @@ bot = commands.Bot(command_prefix="$", intents=intents)
 @bot.event
 async def on_ready():
     print(f"{bot.user.name} has connected to Discord!")
+    await bot.change_presence(activity=discord.Game('Use $help for command list'))
 
 
 @bot.command(name="snooze")
