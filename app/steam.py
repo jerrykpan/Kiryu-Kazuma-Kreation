@@ -21,7 +21,7 @@ def getSteamUserID(username):
         return r_json["response"]["steamid"]
     # if the user doesn't exist
     else:
-        return "This user does not exist."
+        return "This user does not exist or has not spent $5 on Steam."
 
 
 def form_url(id_):
