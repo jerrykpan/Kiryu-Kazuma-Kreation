@@ -118,8 +118,8 @@ class MusicSFX(commands.Cog):
     @commands.command(name="btrf")
     async def btrf(self, ctx):
         """Plays the full version of the Big Time Rush theme song"""
-        url = "https://www.youtube.com/watch?v=XLZP1BbR9XI"
-        message = "Someone just got very epicly styled on."
+        url = "https://www.youtube.com/watch?v=ihl4iHN2Ni4"
+        message = "Someone just got __***very***__ epicly styled on."
         await self.play(ctx, url=url, message=message)
 
     @commands.command(name="what")
