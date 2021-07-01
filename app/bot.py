@@ -53,6 +53,16 @@ async def hello(ctx):
     await ctx.send(response)
 
 
+@bot.command(name="sample", help="Sample embed message")
+async def sampleEmbed(ctx):
+    embed = discord.Embed(title="Sample Embed",
+                          url="https://en.wikipedia.org/wiki/Cock_and_ball_torture",
+                          description="This is an example of an embed message with different components huehue",
+                          colour="0E3B6A"
+                          )
+    await ctx.send(embed=embed)
+
+
 @bot.command(name="roll_dice", help="Simulates rolling N number of dice with S sides")
 async def roll(ctx, dice_num: int, side_num: int):
     dice = [
