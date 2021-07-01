@@ -4,8 +4,11 @@
 # Youtube Downloads
 youtube*
 
-# error log
+# Logs and databases #
+######################
 *.log
+*.sql
+*.sqlite
 
 # test files
 test*
