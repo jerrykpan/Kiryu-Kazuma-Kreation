@@ -5,9 +5,11 @@ wl_payload = {'p': 0}
 
 wl_url = 'https://store.steampowered.com/wishlist/profiles//wishlistdata/'
 
-load_dotenv()
+# load_dotenv()
 # Steam API Token
-STEAM_TOKEN = os.getenv('STEAM_TOKEN')
+# STEAM_TOKEN = os.getenv('STEAM_TOKEN')
+STEAM_TOKEN = os.environ.get('STEAM_TOKEN')
+
 
 
 def getSteamUserID(username):
