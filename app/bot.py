@@ -40,6 +40,7 @@ async def snooze(ctx):
         await asyncio.sleep(i)
     await ctx.send("*W O K E*")
 
+
 @bot.command(name="hello", help="Responds with a random greeting")
 async def hello(ctx):
     sayings = [
@@ -55,12 +56,60 @@ async def hello(ctx):
 
 @bot.command(name="sample", help="Sample embed message")
 async def sampleEmbed(ctx):
+    colour = discord.Colour.from_rgb(14, 59, 106)
     embed = discord.Embed(title="Sample Embed",
                           url="https://en.wikipedia.org/wiki/Cock_and_ball_torture",
                           description="This is an example of an embed message with different components huehue",
-                          colour="0E3B6A"
+                          colour=colour.value
                           )
-    await ctx.send(embed=embed)
+    embed.description = "bruh"
+    embed.set_footer(text="bruh moment")
+    # await ctx.send(embed=embed)
+    embed1 = discord.Embed(title="Embed 1", description="This is the first embed.", colour=discord.Colour.red())
+    embed2 = discord.Embed(title="Embed 2", description="This is the second embed.", colour=discord.Colour.green())
+    embed3 = discord.Embed(title="Embed 3", description="This is the third embed.", colour=discord.Colour.blue())
+    embeds = [embed1, embed2, embed3]
+    buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
+    current = 0
+    # gets the object of the message so that we can edit it upon reaction
+    msg = await ctx.send(embed=embeds[current])
+
+    # having the bot add these reactions (buttons) for users to press
+    for button in buttons:
+        await msg.add_reaction(button)
+
+    while True:
+        try:
+            reaction, user = await bot.wait_for("reaction_add", check=lambda reaction, user: user == ctx.author and reaction.emoji in buttons, timeout=60.0)
+
+        except asyncio.TimeoutError:
+            embed = embeds[current]
+            embed.set_footer(text="Timed out.")
+            await msg.clear_reactions()
+
+        else:
+            past_page = current
+            # if the user reacts with a rewind emoji
+            if reaction.emoji == u"\u23EA":
+                current = 0     # move them to the first page
+            # if the user reacts with the backwards arrow emoji
+            elif reaction.emoji == u"\u25C0":
+                if current > 0:     # if there are pages to go backwards to
+                    current -= 1    # moves the page backwards one
+            # if the user reacts with the forwards arrow emoji
+            elif reaction.emoji == u"\u25B6":
+                if current < len(embeds) - 1:   # if there are pages to go forwards to
+                    current += 1                # moves the page forwards one
+            # if the user reacts with the fast forward emoji
+            elif reaction.emoji == u"\u23E9":
+                current = len(embeds) - 1       # moves the page to the last page
+            # removes each reaction upon user reaction
+            for button in buttons:
+                await msg.remove_reaction(button, ctx.author)
+            # if we are on a new page
+            if current != past_page:
+                await msg.edit(embed=embeds[current])
+
 
 
 @bot.command(name="roll_dice", help="Simulates rolling N number of dice with S sides")

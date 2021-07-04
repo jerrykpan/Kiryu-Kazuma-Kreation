@@ -153,38 +153,38 @@ class MusicSFX(commands.Cog):
     @commands.command(name="test")
     async def test(self, ctx):
         await ctx.send("work?")
-
-        # get specific guild you want to have the functionality for
-        guild = discord.utils.get(self.bot.guilds, name=GUILD)
-
-        # get all the voice channels in the guild
-        # the list comprehension returns a generator object, so list() turns it into a list
-        voice_channels = list(c for c in guild.channels if c.type == ChannelType.voice)
-
-        # sort the list of vc's by size
-        # key is the function to run on each element, that's how it's compared
-        voice_channels.sort(key=lambda x: len(x.members))
-
-        # if there are any active channels
-        if len(voice_channels[-1].members) > 0:
-            # take the channel with the most members
-            vc_choices = [voice_channels.pop()]
-            # if there are multiple channels with the same number of members
-            while len(voice_channels[-1].members) == len(vc_choices[0].members):
-                vc_choices.append(voice_channels.pop())
-            # picking a random channel if there are multiple channels with the same number of members
-            if len(vc_choices) > 1:
-                vc_to_join = random.choice(vc_choices)
-            else:
-                vc_to_join = vc_choices[0]
-            # play friday night
-            url = "https://www.youtube.com/watch?v=IernJ-2gZ_U"
-            await self.play(ctx, url=url, chnl=vc_to_join)
-
-        # if not, it is a sad day
-        else:
-            tc_to_msg = discord.utils.find(lambda chnl: "bot" in chnl.name, guild.text_channels)
-            await tc_to_msg.send("Seems like there won't be any celebrating tonight. :pensive:")
+        #
+        # # get specific guild you want to have the functionality for
+        # guild = discord.utils.get(self.bot.guilds, name=GUILD)
+        #
+        # # get all the voice channels in the guild
+        # # the list comprehension returns a generator object, so list() turns it into a list
+        # voice_channels = list(c for c in guild.channels if c.type == ChannelType.voice)
+        #
+        # # sort the list of vc's by size
+        # # key is the function to run on each element, that's how it's compared
+        # voice_channels.sort(key=lambda x: len(x.members))
+        #
+        # # if there are any active channels
+        # if len(voice_channels[-1].members) > 0:
+        #     # take the channel with the most members
+        #     vc_choices = [voice_channels.pop()]
+        #     # if there are multiple channels with the same number of members
+        #     while len(voice_channels[-1].members) == len(vc_choices[0].members):
+        #         vc_choices.append(voice_channels.pop())
+        #     # picking a random channel if there are multiple channels with the same number of members
+        #     if len(vc_choices) > 1:
+        #         vc_to_join = random.choice(vc_choices)
+        #     else:
+        #         vc_to_join = vc_choices[0]
+        #     # play friday night
+        #     url = "https://www.youtube.com/watch?v=IernJ-2gZ_U"
+        #     await self.play(ctx, url=url, chnl=vc_to_join)
+        #
+        # # if not, it is a sad day
+        # else:
+        #     tc_to_msg = discord.utils.find(lambda chnl: "bot" in chnl.name, guild.text_channels)
+        #     await tc_to_msg.send("Seems like there won't be any celebrating tonight. :pensive:")
 
     # @tasks.loop(minutes=3.0)
     # async def friday_night(self):
