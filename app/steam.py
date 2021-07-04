@@ -1,5 +1,6 @@
 import requests
 import os
+import bot
 from dotenv import load_dotenv
 wl_payload = {'p': 0}
 
@@ -8,12 +9,11 @@ wl_url = 'https://store.steampowered.com/wishlist/profiles//wishlistdata/'
 # load_dotenv()
 # Steam API Token
 # STEAM_TOKEN = os.getenv('STEAM_TOKEN')
-STEAM_TOKEN = os.environ.get('STEAM_TOKEN')
-
+# STEAM_TOKEN = os.environ.get('STEAM_TOKEN')
 
 
 def getSteamUserID(username):
-    id_payload = {"key": STEAM_TOKEN, "vanityurl": username}
+    id_payload = {"key": bot.STEAM_TOKEN, "vanityurl": username}
     r = requests.get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/", params=id_payload)
     r_json = r.json()
 

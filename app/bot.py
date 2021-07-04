@@ -16,7 +16,7 @@ from discord.ext import commands, tasks
 # TOKEN = os.getenv('DISCORD_TOKEN')
 
 TOKEN = os.environ.get('DISCORD_TOKEN')
-
+STEAM_TOKEN = os.environ.get('STEAM_TOKEN')
 # 2
 
 # Declaring intents
@@ -186,4 +186,5 @@ async def help(ctx):
 bot.add_cog(MusicSFX(bot))
 bot.add_cog(SteamGames(bot))
 
-bot.run(TOKEN)
+if __name__ == "__main__":
+    bot.run(TOKEN)
