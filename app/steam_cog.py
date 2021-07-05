@@ -108,7 +108,6 @@ class SteamGames(commands.Cog):
                     line += game["discount_price"] + "  ~~$" + game["og_price"] + "~~"
                 else:
                     line += game["og_price"]
-                print(line)
                 lines.append(line)
         else:
             for game in wl_games[current_pg*interval:]:
@@ -117,7 +116,6 @@ class SteamGames(commands.Cog):
                     line += game["discount_price"] + "  ~~$" + game["og_price"] + "~~"
                 else:
                     line += game["og_price"]
-                print(line)
                 lines.append(line)
         desc = "\n".join(lines)
         return desc

@@ -50,6 +50,7 @@ def get_games(wl, upper_price=None):
         # if the game has a price
         if len(item["subs"]) > 0 and "discount_block" in item["subs"][0]:
             game = find_price(item)
+            print(game)
             # if there is a price limit
             if upper_price is not None:
                 # if the game is on discount
