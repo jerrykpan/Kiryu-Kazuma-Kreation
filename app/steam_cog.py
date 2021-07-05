@@ -41,7 +41,6 @@ class SteamGames(commands.Cog):
                     user_games = steam.get_games(user_wl, price_limit)
                     print("creating the embed")
                     await self.set_wl_embed(ctx, user_games)
-                    print("Wishlish presented")
                 # if the user's wishlist is not public
                 else:
                     await ctx.send(user_wl)

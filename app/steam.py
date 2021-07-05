@@ -13,7 +13,7 @@ STEAM_TOKEN = os.environ.get('STEAM_TOKEN')
 
 
 def getSteamUserID(username):
-    id_payload = {"key": bot.STEAM_TOKEN, "vanityurl": username}
+    id_payload = {"key": STEAM_TOKEN, "vanityurl": username}
     r = requests.get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/", params=id_payload)
     r_json = r.json()
 
@@ -43,6 +43,7 @@ def get_wl(url):
 
 
 def get_games(wl, upper_price=None):
+    print("beginning of get_games")
     full_wl_games = [wl[item] for item in wl.keys()]
     games_list = []
     for item in full_wl_games:
@@ -63,9 +64,9 @@ def get_games(wl, upper_price=None):
             # if there is no price limit
             else:
                 games_list.append(find_price(item))
-
+    print("before the sorting")
     games_list.sort(key=lowest_price_of_game)
-
+    print("bout to return da list")
     return games_list
 
 
@@ -105,7 +106,7 @@ def runshit(upper_price=None):
             print(game["title"] + ": " + game["og_price"])
 
 
-import bot
+# import bot
 
 # runshit(10)  # testing
 
