@@ -34,7 +34,6 @@ class SteamGames(commands.Cog):
                 # if the user's wishlist is public
                 if not isinstance(user_wl, str):
                     user_games = steam.get_games(user_wl, price_limit)
-                    print("creating the embed")
                     await self.set_wl_embed(ctx, user_games)
                 # if the user's wishlist is not public
                 else:
@@ -56,7 +55,6 @@ class SteamGames(commands.Cog):
         # reaction buttons for user to push
         buttons = [u"\u23EA", u"\u25C0", u"\u25B6", u"\u23E9"]
         wl_embed.description = desc
-        print("before sending the embed")
         msg = await ctx.send(embed=wl_embed)
 
         # adding the reaction buttons to the msg

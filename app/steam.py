@@ -43,14 +43,12 @@ def get_wl(url):
 
 
 def get_games(wl, upper_price=None):
-    print("beginning of get_games")
     full_wl_games = [wl[item] for item in wl.keys()]
     games_list = []
     for item in full_wl_games:
         # if the game has a price
         if len(item["subs"]) > 0 and "discount_block" in item["subs"][0]:
             game = find_price(item)
-            print(game)
             # if there is a price limit
             if upper_price is not None:
                 # if the game is on discount
@@ -65,16 +63,13 @@ def get_games(wl, upper_price=None):
             # if there is no price limit
             else:
                 games_list.append(find_price(item))
-    print("before the sorting")
-    # games_list.sort(key=lowest_price_of_game)
-    print("bout to return da list")
+    games_list.sort(key=lowest_price_of_game)
     return games_list
 
 
 def find_price(game):
     game_info = {"title": game["name"]}
     discount_block = game["subs"][0]["discount_block"]
-    print(discount_block)
     # if there is a discount
     try:
         og_price = discount_block[discount_block.index("original_price") + 21 : discount_block.index('</div><div class=\"discount_final')]
@@ -93,6 +88,18 @@ def lowest_price_of_game(game):
         return float(game["discount_price"])
     else:
         return float(game["og_price"])
+
+
+def get_app_details(appid):
+    app_payload = {"appids": appid}
+    r = requests.get("https://store.steampowered.com/api/appdetails/", params=app_payload)
+    r_json = r.json()
+    app_data = r_json[str(appid)]["data"]
+    if r_json[str(appid)]["success"]:
+        app_details = {"name": app_data["name"], "currency": app_data["currency"], "initial": app_data["initial"], "final": app_data["final"]}
+    else:
+        app_details = {"success": False}
+    return app_details
 
 # Running shit
 def runshit(upper_price=None):
