@@ -1,6 +1,6 @@
 import requests
 import os
-import bot
+
 from dotenv import load_dotenv
 wl_payload = {'p': 0}
 
@@ -104,6 +104,8 @@ def runshit(upper_price=None):
         else:
             print(game["title"] + ": " + game["og_price"])
 
+
+import bot
 
 # runshit(10)  # testing
 
