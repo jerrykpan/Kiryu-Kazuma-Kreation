@@ -32,10 +32,12 @@ class SteamGames(commands.Cog):
             if user_id_msg.isdigit():
                 print("user id has been found")
                 user_url = steam.form_url(user_id_msg)
-                print("user wl has been found")
+                print("before user wl has been found")
                 user_wl = steam.get_wl(user_url)
+                print("after user wl has been found")
                 # if the user's wishlist is public
                 if not isinstance(user_wl, str):
+                    print("after isinstance")
                     user_games = steam.get_games(user_wl, price_limit)
                     print("creating the embed")
                     await self.set_wl_embed(ctx, user_games)
