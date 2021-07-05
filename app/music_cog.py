@@ -140,7 +140,8 @@ class MusicSFX(commands.Cog):
     async def damedane(self, ctx):
         """pain"""
         url = "https://www.youtube.com/watch?v=CAxFsO4ejMU"
-        message = "pain :pain:"
+        emoji = discord.utils.get(ctx.guild.emojis, name="pain")
+        message = "pain " + str(emoji)
         await self.play(ctx, url=url, message=message)
 
     @commands.command(name="fridaynightost")
