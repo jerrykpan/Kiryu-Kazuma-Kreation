@@ -35,6 +35,7 @@ class SteamGames(commands.Cog):
                 if not isinstance(user_wl, str):
                     user_games = steam.get_games(user_wl, price_limit)
                     await self.set_wl_embed(ctx, user_games)
+                    print("Wishlish presented")
                 # if the user's wishlist is not public
                 else:
                     await ctx.send(user_wl)
@@ -95,6 +96,7 @@ class SteamGames(commands.Cog):
                     wl_embed.description = desc
                     wl_embed.set_footer(text="Pg " + str(current_pg+1) + " of " + str(last_pg+1))
                     await msg.edit(embed=wl_embed)
+                    print("page changed")
 
     async def set_wl_desc(self, wl_games, current_pg, last_pg, interval):
         lines = []
