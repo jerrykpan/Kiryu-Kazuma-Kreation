@@ -24,12 +24,15 @@ class SteamGames(commands.Cog):
 
     @commands.command(name="wl", help="Returns all the games on your Steam wishlist under $X (optional price limit) sorted by ascending price.")
     async def get_wl_prices(self, ctx, username=None, price_limit: float = None):
+        print("command at least works")
         # if they provide a username and price limit
         if username is not None:
             user_id_msg = steam.getSteamUserID(username)
             # if we really got the user's ID
             if user_id_msg.isdigit():
+                print("user id has been found")
                 user_url = steam.form_url(user_id_msg)
+                print("user wl has been found")
                 user_wl = steam.get_wl(user_url)
                 # if the user's wishlist is public
                 if not isinstance(user_wl, str):
