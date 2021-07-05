@@ -3,8 +3,8 @@ from discord.ext import commands
 import steam
 import asyncio
 
-steam_rgb = (14, 59, 106)
-
+STEAM_RGB = (14, 59, 106)
+steam_embed_colour = discord.Colour.from_rgb(*STEAM_RGB)
 
 class SteamGames(commands.Cog):
     def __init__(self, bot):
@@ -48,8 +48,8 @@ class SteamGames(commands.Cog):
         interval = 10
         last_pg = len(wl_games) // interval
         desc = await self.set_wl_desc(wl_games, current_pg, last_pg, interval)
-        wl_embed_colour = discord.Colour.from_rgb(14, 59, 106)
-        wl_embed = discord.Embed(title="Your Steam Wishlist", colour=wl_embed_colour)
+
+        wl_embed = discord.Embed(title="Your Steam Wishlist", colour=steam_embed_colour)
         current_pg = 0
         wl_embed.set_footer(text="Pg " + str(current_pg+1) + " of " + str(last_pg+1))
         # reaction buttons for user to push
@@ -96,7 +96,6 @@ class SteamGames(commands.Cog):
                     wl_embed.set_footer(text="Pg " + str(current_pg+1) + " of " + str(last_pg+1))
                     await msg.edit(embed=wl_embed)
 
-
     async def set_wl_desc(self, wl_games, current_pg, last_pg, interval):
         lines = []
         if current_pg != last_pg:
@@ -118,5 +117,18 @@ class SteamGames(commands.Cog):
         desc = "\n".join(lines)
         return desc
 
+    @commands.command(name="gimme",help="gives details of Steam game given ID")
+    async def gimme_app_details(self, ctx, appid):
+        app_details = steam.get_app_details(appid)
+        inish = app_details["initial"]
+        fine = app_details["final"]
+        embed = discord.Embed(title=app_details["name"], color=steam_embed_colour)
+        if app_details["initial"] != app_details["final"]:
+            desc = "${:.2f}  ~~${:.2f}~~".format(fine/100, inish/100)
+        else:
+            desc = "${:.2f}".format(fine/100)
+        embed.description = desc
+        embed.set_footer(text="Kill me.")
+        await ctx.send(embed=embed)
 
 # import steam

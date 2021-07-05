@@ -90,13 +90,14 @@ def lowest_price_of_game(game):
         return float(game["og_price"])
 
 
-def get_app_details(appid):
+def get_app_details(appid:str):
     app_payload = {"appids": appid}
     r = requests.get("https://store.steampowered.com/api/appdetails/", params=app_payload)
     r_json = r.json()
-    app_data = r_json[str(appid)]["data"]
-    if r_json[str(appid)]["success"]:
-        app_details = {"name": app_data["name"], "currency": app_data["currency"], "initial": app_data["initial"], "final": app_data["final"]}
+    app_data = r_json[appid]["data"]
+    app_price_data = app_data["price_overview"]
+    if r_json[appid]["success"]:
+        app_details = {"name": app_data["name"], "currency": app_price_data["currency"], "initial": app_price_data["initial"], "final": app_price_data["final"]}
     else:
         app_details = {"success": False}
     return app_details
