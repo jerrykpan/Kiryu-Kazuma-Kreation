@@ -74,6 +74,7 @@ def get_games(wl, upper_price=None):
 def find_price(game):
     game_info = {"title": game["name"]}
     discount_block = game["subs"][0]["discount_block"]
+    print(discount_block)
     # if there is a discount
     try:
         og_price = discount_block[discount_block.index("original_price") + 21 : discount_block.index('</div><div class=\"discount_final')]
