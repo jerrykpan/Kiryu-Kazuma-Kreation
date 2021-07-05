@@ -24,20 +24,15 @@ class SteamGames(commands.Cog):
 
     @commands.command(name="wl", help="Returns all the games on your Steam wishlist under $X (optional price limit) sorted by ascending price.")
     async def get_wl_prices(self, ctx, username=None, price_limit: float = None):
-        print("command at least works")
         # if they provide a username and price limit
         if username is not None:
             user_id_msg = steam.getSteamUserID(username)
             # if we really got the user's ID
             if user_id_msg.isdigit():
-                print("user id has been found")
                 user_url = steam.form_url(user_id_msg)
-                print("before user wl has been found")
                 user_wl = steam.get_wl(user_url)
-                print("after user wl has been found")
                 # if the user's wishlist is public
                 if not isinstance(user_wl, str):
-                    print("after isinstance")
                     user_games = steam.get_games(user_wl, price_limit)
                     print("creating the embed")
                     await self.set_wl_embed(ctx, user_games)
@@ -102,7 +97,7 @@ class SteamGames(commands.Cog):
                     wl_embed.description = desc
                     wl_embed.set_footer(text="Pg " + str(current_pg+1) + " of " + str(last_pg+1))
                     await msg.edit(embed=wl_embed)
-                    print("page changed")
+
 
     async def set_wl_desc(self, wl_games, current_pg, last_pg, interval):
         lines = []
@@ -113,6 +108,7 @@ class SteamGames(commands.Cog):
                     line += game["discount_price"] + "  ~~$" + game["og_price"] + "~~"
                 else:
                     line += game["og_price"]
+                print(line)
                 lines.append(line)
         else:
             for game in wl_games[current_pg*interval:]:
@@ -121,6 +117,7 @@ class SteamGames(commands.Cog):
                     line += game["discount_price"] + "  ~~$" + game["og_price"] + "~~"
                 else:
                     line += game["og_price"]
+                print(line)
                 lines.append(line)
         desc = "\n".join(lines)
         return desc
