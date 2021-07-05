@@ -65,7 +65,7 @@ def get_games(wl, upper_price=None):
             else:
                 games_list.append(find_price(item))
     print("before the sorting")
-    games_list.sort(key=lowest_price_of_game)
+    # games_list.sort(key=lowest_price_of_game)
     print("bout to return da list")
     return games_list
 

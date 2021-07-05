@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-
+import steam
 import asyncio
 
 steam_rgb = (14, 59, 106)
@@ -126,4 +126,4 @@ class SteamGames(commands.Cog):
         return desc
 
 
-import steam
+# import steam
