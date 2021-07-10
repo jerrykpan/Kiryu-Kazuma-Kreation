@@ -151,6 +151,20 @@ class MusicSFX(commands.Cog):
         message = "Ladies and gentlemen... the weekend."
         await self.play(ctx, url=url, message=message)
 
+    @commands.command(name="seinfeld")
+    async def seinfeld(self, ctx):
+        """*slaps bass*"""
+        url = "https://www.youtube.com/watch?v=EnPGGDWQMqk"
+        message = "*slaps bass*"
+        await self.play(ctx, url=url, message=message)
+
+    @commands.command(name="seinfeldf")
+    async def seinfeldf(self, ctx):
+        """*slaps bass epicly*"""
+        url = "https://www.youtube.com/watch?v=_V2sBURgUBI"
+        message = "*slaps bass epicly*"
+        await self.play(ctx, url=url, message=message)
+
     @commands.command(name="test")
     async def test(self, ctx):
         await ctx.send("work?")
